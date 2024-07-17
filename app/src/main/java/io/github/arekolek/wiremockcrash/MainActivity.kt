@@ -8,6 +8,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
+import java.util.regex.Pattern
+import java.util.regex.PatternSyntaxException
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +21,13 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        Pattern.compile("\\{(?<variable>[^}]+)\\}|(?<wildcard>\\*\\*)")
+        try {
+            Pattern.compile("\\{(?<variable>[^}]+)}|(?<wildcard>\\*\\*)")
+            error("Expecting above pattern to fail")
+        } catch (_: PatternSyntaxException) {
         }
 
         // Bug reproduction:
