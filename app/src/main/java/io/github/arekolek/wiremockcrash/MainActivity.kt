@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             Pattern.compile("\\{(?<variable>[^}]+)}|(?<wildcard>\\*\\*)")
             error("Expecting above pattern to fail")
         } catch (_: PatternSyntaxException) {
+            // NOP
         }
 
         // Bug reproduction:

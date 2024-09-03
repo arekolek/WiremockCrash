@@ -21,3 +21,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "WiremockCrash"
 include(":app")
+include(":workaround")
+
+includeBuild("../wiremock") {
+    dependencySubstitution {
+        substitute(module("org.wiremock:wiremock")).using(project(":"))
+    }
+}
